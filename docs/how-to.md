@@ -58,9 +58,17 @@ man act ride inhale wall success example anxiety damp daring slogan still town s
 ### Getting tokens
 After you've created wallet, you need tokens there, for these purposes you can either send the following POST request
 ```
-curl -X POST -F 'address=<you-wallet>' -F 'denom=loki' http://34.77.171.169:5005/request
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"address":"<you-wallet>","denom":"loki"}' \
+  http://34.77.171.169:5005/request
 ```
 You will be provided with loki tokens.
+
+### Checking balance 
+```
+bandd query bank balances <you-wallet>
+```
 
 ### Sending transaction to become a validator
 In order to become a validator you should send a ```create-validator``` transaction with the command below
