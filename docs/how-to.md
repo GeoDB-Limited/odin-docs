@@ -1,5 +1,7 @@
 # How to start with ODIN system
 
+_Prerequisites: docker and docker-compose installed_
+
 ## Launching audit node
 
 Clone this [repository](https://github.com/GeoDB-Limited/odin-testnet-public-tools).
