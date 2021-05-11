@@ -7,18 +7,34 @@ _Prerequisites: docker and docker-compose installed_
 Clone this [repository](https://github.com/GeoDB-Limited/odin-testnet-public-tools).
 
 The repository contains the docker-compose file for quick launching of the node with preconfigurations on rpc, and genesis.json.
-
-Run startup bash script:
+Change your current directory to ```node``` <br>
+Run startup bash script (for linux, mac):
 ```bash
 ./start.sh
 ```
-
-It will start the light node for you, which will ingest all the previous heights
 
 ### Launching audit node with reporter
 ```bash
 ./start.sh r
 ```
+
+Run following commands (for windows):
+```
+docker-compose -f ./docker-compose.yaml down -v --remove-orphans
+
+docker-compose -f ./docker-compose.yaml pull
+
+docker-compose -f ./docker-compose.yaml up -d
+```
+
+For reporter (for windows):
+```
+docker-compose -f ./docker-compose-reporter.yaml pull
+
+docker-compose -f ./docker-compose-reporter.yaml up -d
+```
+
+It will start the light node for you, which will ingest all the previous heights
 
 After node is launched, it starts syncing with network.
 
