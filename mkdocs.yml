@@ -1,0 +1,6 @@
+site_name: Odin documentation
+nav:
+  - Home: index.md
+  - About: about.md
+  - How to's: how-to.md
+theme: readthedocs
