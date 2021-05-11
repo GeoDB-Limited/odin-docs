@@ -70,6 +70,8 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#getting-tokens">Getting tokens</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#checking-balance">Checking balance</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#sending-transaction-to-become-a-validator">Sending transaction to become a validator</a>
     </li>
         </ul>
@@ -149,9 +151,15 @@ man act ride inhale wall success example anxiety damp daring slogan still town s
 </code></pre>
 <h3 id="getting-tokens">Getting tokens</h3>
 <p>After you've created wallet, you need tokens there, for these purposes you can either send the following POST request</p>
-<pre><code>curl -X POST -F 'address=&lt;you-wallet&gt;' -F 'denom=loki' http://34.77.171.169:5005/request
+<pre><code>curl --header &quot;Content-Type: application/json&quot; \
+  --request POST \
+  --data '{&quot;address&quot;:&quot;&lt;you-wallet&gt;&quot;,&quot;denom&quot;:&quot;loki&quot;}' \
+  http://34.77.171.169:5005/request
 </code></pre>
 <p>You will be provided with loki tokens.</p>
+<h3 id="checking-balance">Checking balance</h3>
+<pre><code>bandd query bank balances &lt;you-wallet&gt;
+</code></pre>
 <h3 id="sending-transaction-to-become-a-validator">Sending transaction to become a validator</h3>
 <p>In order to become a validator you should send a <code>create-validator</code> transaction with the command below</p>
 <pre><code class="language-bash">bandd tx staking create-validator \
