@@ -115,14 +115,27 @@
 <p><em>Prerequisites: docker and docker-compose installed</em></p>
 <h2 id="launching-audit-node">Launching audit node</h2>
 <p>Clone this <a href="https://github.com/GeoDB-Limited/odin-testnet-public-tools">repository</a>.</p>
-<p>The repository contains the docker-compose file for quick launching of the node with preconfigurations on rpc, and genesis.json.</p>
-<p>Run startup bash script:</p>
+<p>The repository contains the docker-compose file for quick launching of the node with preconfigurations on rpc, and genesis.json.
+Change your current directory to <code>node</code> <br>
+Run startup bash script (for linux, mac):</p>
 <pre><code class="language-bash">./start.sh
 </code></pre>
-<p>It will start the light node for you, which will ingest all the previous heights</p>
 <h3 id="launching-audit-node-with-reporter">Launching audit node with reporter</h3>
 <pre><code class="language-bash">./start.sh r
 </code></pre>
+<p>Run following commands (for windows):</p>
+<pre><code>docker-compose -f ./docker-compose.yaml down -v --remove-orphans
+
+docker-compose -f ./docker-compose.yaml pull
+
+docker-compose -f ./docker-compose.yaml up -d
+</code></pre>
+<p>For reporter (for windows):</p>
+<pre><code>docker-compose -f ./docker-compose-reporter.yaml pull
+
+docker-compose -f ./docker-compose-reporter.yaml up -d
+</code></pre>
+<p>It will start the light node for you, which will ingest all the previous heights</p>
 <p>After node is launched, it starts syncing with network.</p>
 <p><em>Note: Check our nodes real-time logs with the following command:</em></p>
 <p><code>docker-compose logs -f --tail 100 node</code></p>
