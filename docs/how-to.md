@@ -78,7 +78,7 @@ After you've created wallet, you need tokens there, for these purposes you can e
 ```
 curl --header "Content-Type: application/json" \
   --request POST \
-  --data '{"address":"<you-wallet>","denom":"loki"}' \
+  --data '{"address":"<your-wallet>","denom":"loki"}' \
   http://34.77.171.169:5005/request
 ```
 You will be provided with loki tokens.
@@ -100,5 +100,33 @@ bandd tx staking create-validator \
     --min-self-delegation 1 \
     --moniker <your-moniker> \
     --pubkey $(bandd tendermint show-validator) \
+    --chain-id odin-testnet
+```
+
+### Verifying the result
+Perform the following command, and among the validators find the one with your moniker
+```bash
+bandd query staking validators
+```
+
+## Delegating tokens to someone
+
+### Getting validator operator address
+If the specified validator address is in your keyring:
+```bash
+bandd keys show <your-wallet> --bech val -a
+```
+
+Otherwise
+```bash
+bandd query staking validators
+```
+will return all the system validators, and you can get odinvaloper... address there
+
+```bash
+bandd tx staking delegate \
+    --validator-addr <validator-operator-address> \ 
+    --amount <your-amount-to-delegate>loki \
+    --from <your-wallet-name> \
     --chain-id odin-testnet
 ```
