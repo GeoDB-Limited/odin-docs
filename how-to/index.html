@@ -74,6 +74,14 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#sending-transaction-to-become-a-validator">Sending transaction to become a validator</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#verifying-the-result">Verifying the result</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#delegating-tokens-to-someone">Delegating tokens to someone</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#getting-validator-operator-address">Getting validator operator address</a>
+    </li>
         </ul>
     </li>
     </ul>
@@ -167,7 +175,7 @@ man act ride inhale wall success example anxiety damp daring slogan still town s
 <p>After you've created wallet, you need tokens there, for these purposes you can either send the following POST request</p>
 <pre><code>curl --header &quot;Content-Type: application/json&quot; \
   --request POST \
-  --data '{&quot;address&quot;:&quot;&lt;you-wallet&gt;&quot;,&quot;denom&quot;:&quot;loki&quot;}' \
+  --data '{&quot;address&quot;:&quot;&lt;your-wallet&gt;&quot;,&quot;denom&quot;:&quot;loki&quot;}' \
   http://34.77.171.169:5005/request
 </code></pre>
 <p>You will be provided with loki tokens.</p>
@@ -185,6 +193,25 @@ man act ride inhale wall success example anxiety damp daring slogan still town s
     --min-self-delegation 1 \
     --moniker &lt;your-moniker&gt; \
     --pubkey $(bandd tendermint show-validator) \
+    --chain-id odin-testnet
+</code></pre>
+<h3 id="verifying-the-result">Verifying the result</h3>
+<p>Perform the following command, and among the validators find the one with your moniker</p>
+<pre><code class="language-bash">bandd query staking validators
+</code></pre>
+<h2 id="delegating-tokens-to-someone">Delegating tokens to someone</h2>
+<h3 id="getting-validator-operator-address">Getting validator operator address</h3>
+<p>If the specified validator address is in your keyring:</p>
+<pre><code class="language-bash">bandd keys show &lt;your-wallet&gt; --bech val -a
+</code></pre>
+<p>Otherwise</p>
+<pre><code class="language-bash">bandd query staking validators
+</code></pre>
+<p>will return all the system validators, and you can get odinvaloper... address there</p>
+<pre><code class="language-bash">bandd tx staking delegate \
+    --validator-addr &lt;validator-operator-address&gt; \ 
+    --amount &lt;your-amount-to-delegate&gt;loki \
+    --from &lt;your-wallet-name&gt; \
     --chain-id odin-testnet
 </code></pre>
               
